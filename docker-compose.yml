@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend/dockerfile
+    ports:
+      - "3000:3000"
+    restart: always
+    environment:
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+
+  frontend:
+    image: frontend/dockerfile
+    ports:
+      - "80:80"
+    restart: always
+
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: always
+
+volumes:
+  mongodb_data:
